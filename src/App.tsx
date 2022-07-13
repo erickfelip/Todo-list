@@ -6,6 +6,14 @@ import { Task } from "./@types";
 
 export const App = () => {
   const [taskList, setTaskList] = useState<Task[]>([]);
+
+  const deleteTask = (id: string) => {
+    setTaskList(
+      taskList.filter((task) => {
+        return task.id !== id;
+      })
+    );
+  };
   return (
     <>
       <Header />
@@ -14,7 +22,7 @@ export const App = () => {
         taskList={taskList}
         setTaskList={setTaskList}
       />
-      <TaskList />
+      <TaskList taskList={taskList} handleDelete={deleteTask} />
     </>
   );
 };
