@@ -6,9 +6,10 @@ import { BiPencil, BiTrash } from "react-icons/bi";
 interface Props {
   taskList: Task[];
   handleDelete(id: string): void;
+  handleEditTask(id: string): void;
 }
 
-export const TaskList = ({ taskList, handleDelete }: Props) => {
+export const TaskList = ({ taskList, handleDelete, handleEditTask }: Props) => {
   return (
     <Container>
       {taskList.length > 0 ? (
@@ -18,7 +19,7 @@ export const TaskList = ({ taskList, handleDelete }: Props) => {
               <h1>{task.title}</h1>
             </Content>
             <Icons>
-              <BiPencil />
+              <BiPencil onClick={() => handleEditTask(task.id)} />
               <BiTrash onClick={() => handleDelete(task.id)} />
             </Icons>
           </Wrapper>
