@@ -8,6 +8,7 @@ interface Props {
   taskList: Task[];
   setTaskList?: React.Dispatch<React.SetStateAction<Task[]>>;
   task?: Task | null;
+  handleUpdate?(id: string, title: string): void;
 }
 
 export const TaskForm = ({
@@ -15,6 +16,7 @@ export const TaskForm = ({
   taskList,
   setTaskList,
   task,
+  handleUpdate,
 }: Props) => {
   const [id, setId] = useState<string>("");
   const [title, setTitle] = useState<string>("");
@@ -28,10 +30,14 @@ export const TaskForm = ({
 
   const addTaskHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const id = uuidv4();
-    const newTask: Task = { id, title };
-    setTaskList!([...taskList, newTask]);
-    setTitle("");
+    if (handleUpdate) {
+      handleUpdate(id, title);
+    } else {
+      const id = uuidv4();
+      const newTask: Task = { id, title };
+      setTaskList!([...taskList, newTask]);
+      setTitle("");
+    }
   };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

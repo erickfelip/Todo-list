@@ -26,6 +26,17 @@ export const App = () => {
       })
     );
   };
+
+  const UpdateTask = (id: string, title: string) => {
+    const updateTask: Task = { id, title };
+
+    const updatedItems = taskList.map((task) => {
+      return task.id === updateTask.id ? updateTask : task;
+    });
+
+    setTaskList(updatedItems);
+    setIsModalOpen(!isModalOpen);
+  };
   return (
     <>
       <Modal
@@ -36,6 +47,7 @@ export const App = () => {
             formButton="Edit Task"
             taskList={taskList}
             task={taskToUpdate}
+            handleUpdate={UpdateTask}
           />
         }
       />
