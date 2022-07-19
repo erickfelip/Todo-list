@@ -7,10 +7,16 @@ import { Task } from "./@types";
 
 export const App = () => {
   const [taskList, setTaskList] = useState<Task[]>([]);
+  const [taskToUpdate, setTaskToUpdate] = useState<Task | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
+  };
+
+  const editTask = (task: Task): void => {
+    setIsModalOpen(!isModalOpen);
+    setTaskToUpdate(task);
   };
 
   const deleteTask = (id: string) => {
@@ -25,7 +31,13 @@ export const App = () => {
       <Modal
         onClose={toggleModal}
         isOpen={isModalOpen}
-        children={<TaskForm formButton="Edit Task" taskList={taskList} />}
+        children={
+          <TaskForm
+            formButton="Edit Task"
+            taskList={taskList}
+            task={taskToUpdate}
+          />
+        }
       />
       <Header />
       <TaskForm
@@ -36,7 +48,7 @@ export const App = () => {
       <TaskList
         taskList={taskList}
         handleDelete={deleteTask}
-        handleEditTask={toggleModal}
+        handleEditTask={editTask}
       />
     </>
   );

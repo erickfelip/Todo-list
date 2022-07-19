@@ -7,11 +7,24 @@ interface Props {
   formButton: string;
   taskList: Task[];
   setTaskList?: React.Dispatch<React.SetStateAction<Task[]>>;
+  task?: Task | null;
 }
 
-export const TaskForm = ({ formButton, taskList, setTaskList }: Props) => {
+export const TaskForm = ({
+  formButton,
+  taskList,
+  setTaskList,
+  task,
+}: Props) => {
   const [id, setId] = useState<string>("");
   const [title, setTitle] = useState<string>("");
+
+  useEffect(() => {
+    if (task) {
+      setId(task.id);
+      setTitle(task.title);
+    }
+  }, [task]);
 
   const addTaskHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,10 +32,7 @@ export const TaskForm = ({ formButton, taskList, setTaskList }: Props) => {
     const newTask: Task = { id, title };
     setTaskList!([...taskList, newTask]);
     setTitle("");
-
-    console.log(taskList);
   };
-  console.log("ID: ", id);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === "title") {
