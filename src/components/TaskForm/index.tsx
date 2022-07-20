@@ -56,6 +56,7 @@ export const TaskForm = ({
           placeholder="Título da tarefa"
           onChange={handleChange}
           value={title}
+          required
         />
       </Content>
       <SubmitInput type="submit" value={formButton} />
