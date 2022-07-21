@@ -1,7 +1,8 @@
 import React from "react";
 import { Task } from "../../@types";
-import { Wrapper, Content, Icons, Container, NoTask } from "./styles";
+import { Wrapper, Content, Icons, Container, NoTask, Text } from "./styles";
 import { BiPencil, BiTrash } from "react-icons/bi";
+import { MdList } from "react-icons/md";
 
 interface Props {
   taskList: Task[];
@@ -16,7 +17,7 @@ export const TaskList = ({ taskList, handleDelete, handleEditTask }: Props) => {
         taskList.map((task) => (
           <Wrapper key={task.id}>
             <Content>
-              <h1>{task.title}</h1>
+              <Text>{task.title}</Text>
             </Content>
             <Icons>
               <BiPencil onClick={() => handleEditTask(task)} />
@@ -25,7 +26,10 @@ export const TaskList = ({ taskList, handleDelete, handleEditTask }: Props) => {
           </Wrapper>
         ))
       ) : (
-        <NoTask>Has no task</NoTask>
+        <NoTask>
+          <MdList size={40} />
+          <Text>Você não tem tarefas registradas :( </Text>
+        </NoTask>
       )}
     </Container>
   );

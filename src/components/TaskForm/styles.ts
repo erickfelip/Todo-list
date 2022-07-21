@@ -27,10 +27,12 @@ export const Input = styled.input`
 `;
 
 export const SubmitInput = styled.input`
-  padding: 0.5rem 1rem;
-  background-color: #751d00;
+  padding: 1rem;
+  background-color: blueviolet;
+  border-radius: 10px;
   margin-bottom: 1.5em;
   transition: 0.5s;
-  border: 1px solid #751d00;
+  border: none;
   cursor: pointer;
+  color: white;
 `;

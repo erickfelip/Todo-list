@@ -4,7 +4,7 @@ import { Container, Content } from "./styles";
 export const Header = () => {
   return (
     <Container>
-      <Content>Todo List</Content>
+      <Content>Task List</Content>
     </Container>
   );
 };
